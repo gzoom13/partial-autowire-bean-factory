@@ -37,6 +37,7 @@ public class LookupInjectionTest {
         assertThat(bean.singletonParameter).isSameAs(singleton);
     }
 
+    // this test fails with existing Spring version
     @Test
     public void lookupPrototypeWithRuntimeAndSingletonParameters() {
         String runtimeParameter = "value";
