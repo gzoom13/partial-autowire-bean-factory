@@ -1,5 +1,3 @@
-Please see [the test](src/test/java/net/golikov/LookupInjectionTest.java)
+### Partial autowire bean factory
 
-This project was created to depict how lookup methods could be improved.
-
-Enhancement of Spring lookup methods would be very useful for creating prototypes.
+Enhancement of Spring lookup methods that is very useful for creating prototypes.

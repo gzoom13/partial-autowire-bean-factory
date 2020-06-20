@@ -1,20 +1,21 @@
-package net.golikov;
+package net.golikov.springframework.beans.factory;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.test.context.BootstrapWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ContextConfiguration(classes = LookupInjectionTest.TestConfiguration.class)
+@BootstrapWith(PartialAutowireContextBootstrapper.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LookupInjectionTest {
 
@@ -37,7 +38,9 @@ public class LookupInjectionTest {
         assertThat(bean.singletonParameter).isSameAs(singleton);
     }
 
-    // this test fails with existing Spring version
+    /**
+     * This test fails without custom factory
+     */
     @Test
     public void lookupPrototypeWithRuntimeAndSingletonParameters() {
         String runtimeParameter = "value";
