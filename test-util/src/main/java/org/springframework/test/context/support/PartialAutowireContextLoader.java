@@ -1,5 +1,6 @@
 package org.springframework.test.context.support;
 
+import net.golikov.springframework.beans.factory.PartialAutowireApplicationContext;
 import net.golikov.springframework.beans.factory.PartialAutowireBeanFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,7 +31,7 @@ public class PartialAutowireContextLoader extends AbstractContextLoader {
 
         delegate.validateMergedContextConfiguration(mergedConfig);
 
-        GenericApplicationContext context = new GenericApplicationContext(new PartialAutowireBeanFactory());
+        GenericApplicationContext context = new PartialAutowireApplicationContext();
 
         ApplicationContext parent = mergedConfig.getParentApplicationContext();
         if (parent != null) {
