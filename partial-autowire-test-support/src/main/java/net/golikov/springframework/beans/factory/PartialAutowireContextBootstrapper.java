@@ -29,15 +29,18 @@ public class PartialAutowireContextBootstrapper extends AbstractTestContextBoots
                 try {
                     Class<?> loaderClass = ClassUtils.forName(GROOVY_XML_CONTEXT_LOADER_CLASS_NAME,
                             PartialAutowireContextBootstrapper.class.getClassLoader());
-                    this.xmlLoader = new PartialAutowireContextLoader((GenericGroovyXmlContextLoader) BeanUtils.instantiateClass(loaderClass));
+                    this.xmlLoader = new PartialAutowireContextLoader((GenericGroovyXmlContextLoader) BeanUtils.instantiateClass(loaderClass),
+                            PartialAutowireGenericXmlApplicationContext::new);
                 } catch (Throwable ex) {
                     throw new IllegalStateException("Failed to enable support for Groovy scripts; "
                             + "could not load class: " + GROOVY_XML_CONTEXT_LOADER_CLASS_NAME, ex);
                 }
             } else {
-                this.xmlLoader = new PartialAutowireContextLoader(new GenericXmlContextLoader());
+                this.xmlLoader = new PartialAutowireContextLoader(new GenericXmlContextLoader(),
+                        PartialAutowireGenericXmlApplicationContext::new);
             }
-            annotationConfigLoader = new PartialAutowireContextLoader(new AnnotationConfigContextLoader());
+            annotationConfigLoader = new PartialAutowireContextLoader(new AnnotationConfigContextLoader(),
+                    PartialAutowireAnnotationConfigApplicationContext::new);
         }
 
         @Override

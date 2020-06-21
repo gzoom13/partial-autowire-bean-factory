@@ -1,7 +1,5 @@
 package org.springframework.test.context.support;
 
-import net.golikov.springframework.beans.factory.PartialAutowireApplicationContext;
-import net.golikov.springframework.beans.factory.PartialAutowireBeanFactory;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
@@ -12,14 +10,19 @@ import org.springframework.test.context.ContextConfigurationAttributes;
 import org.springframework.test.context.MergedContextConfiguration;
 import org.springframework.util.StringUtils;
 
+import java.util.function.Supplier;
+
 public class PartialAutowireContextLoader extends AbstractContextLoader {
 
     protected static final Log logger = LogFactory.getLog(PartialAutowireContextLoader.class);
 
     private final AbstractGenericContextLoader delegate;
+    private final Supplier<GenericApplicationContext> contextSupplier;
 
-    public PartialAutowireContextLoader(AbstractGenericContextLoader delegate) {
+    public PartialAutowireContextLoader(AbstractGenericContextLoader delegate,
+                                        Supplier<GenericApplicationContext> contextSupplier) {
         this.delegate = delegate;
+        this.contextSupplier = contextSupplier;
     }
 
     @Override
@@ -31,7 +34,7 @@ public class PartialAutowireContextLoader extends AbstractContextLoader {
 
         delegate.validateMergedContextConfiguration(mergedConfig);
 
-        GenericApplicationContext context = new PartialAutowireApplicationContext();
+        GenericApplicationContext context = contextSupplier.get();
 
         ApplicationContext parent = mergedConfig.getParentApplicationContext();
         if (parent != null) {
@@ -55,7 +58,7 @@ public class PartialAutowireContextLoader extends AbstractContextLoader {
             logger.debug(String.format("Loading ApplicationContext for locations [%s].",
                     StringUtils.arrayToCommaDelimitedString(locations)));
         }
-        GenericApplicationContext context = new GenericApplicationContext(new PartialAutowireBeanFactory());
+        GenericApplicationContext context = contextSupplier.get();
         delegate.prepareContext(context);
         delegate.customizeBeanFactory(context.getDefaultListableBeanFactory());
         delegate.createBeanDefinitionReader(context).loadBeanDefinitions(locations);

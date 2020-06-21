@@ -2,6 +2,7 @@ dependencies {
     val springVersion: String by project
 
     implementation(project(":test-util"))
+    implementation(project(":partial-autowire"))
 
     implementation("org.springframework", "spring-test", springVersion)
     implementation("org.springframework", "spring-context", springVersion)

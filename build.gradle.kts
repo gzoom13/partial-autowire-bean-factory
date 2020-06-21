@@ -6,7 +6,7 @@ buildscript {
 
 allprojects {
     group = "net.golikov"
-    version = "0.3"
+    version = "0.4"
 
     repositories {
         mavenLocal()
@@ -19,13 +19,14 @@ subprojects {
     apply<JavaLibraryPlugin>()
     apply<MavenPublishPlugin>()
 
-    configure<JavaPluginConvention> {
+    configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_1_8
+        withSourcesJar()
     }
 
     configure<PublishingExtension> {
         publications {
-            create<MavenPublication>("myLibrary") {
+            create<MavenPublication>("library") {
                 from(components["java"])
             }
         }
