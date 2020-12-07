@@ -1,6 +1,6 @@
 buildscript {
     extra.apply {
-        set("springVersion", "5.2.5.RELEASE")
+        set("springVersion", "5.2.8.RELEASE")
     }
 }
 
