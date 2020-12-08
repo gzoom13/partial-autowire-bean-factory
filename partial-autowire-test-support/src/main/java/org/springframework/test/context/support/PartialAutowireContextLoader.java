@@ -26,7 +26,7 @@ public class PartialAutowireContextLoader extends AbstractContextLoader {
     }
 
     @Override
-    public final ConfigurableApplicationContext loadContext(MergedContextConfiguration mergedConfig) throws Exception {
+    public final ConfigurableApplicationContext loadContext(MergedContextConfiguration mergedConfig) {
         if (logger.isDebugEnabled()) {
             logger.debug(String.format("Loading ApplicationContext for merged context configuration [%s].",
                     mergedConfig));
@@ -53,7 +53,7 @@ public class PartialAutowireContextLoader extends AbstractContextLoader {
     }
 
     @Override
-    public final ConfigurableApplicationContext loadContext(String... locations) throws Exception {
+    public final ConfigurableApplicationContext loadContext(String... locations) {
         if (logger.isDebugEnabled()) {
             logger.debug(String.format("Loading ApplicationContext for locations [%s].",
                     StringUtils.arrayToCommaDelimitedString(locations)));

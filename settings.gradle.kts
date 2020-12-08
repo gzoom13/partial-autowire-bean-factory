@@ -1,3 +1,3 @@
 rootProject.name = "partial-autowire-root"
 
-include("util", "partial-autowire", "test-util", "partial-autowire-test-support")
+include("partial-autowire", "partial-autowire-test-support")
