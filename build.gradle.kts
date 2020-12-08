@@ -6,7 +6,7 @@ buildscript {
 
 allprojects {
     group = "net.golikov"
-    version = "0.5-SNAPSHOT"
+    version = "0.5"
 
     repositories {
         mavenLocal()
