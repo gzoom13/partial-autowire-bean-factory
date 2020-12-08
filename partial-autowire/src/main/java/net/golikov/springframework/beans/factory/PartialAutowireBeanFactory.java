@@ -7,6 +7,11 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 
 import java.lang.reflect.Constructor;
 
+/**
+ * This is {@link DefaultListableBeanFactory} that is capable of
+ * injecting singleton from context into constructor, even if they
+ * were not provided explicitly.
+ */
 public class PartialAutowireBeanFactory extends DefaultListableBeanFactory {
 
     @Override
