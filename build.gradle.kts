@@ -10,6 +10,7 @@ allprojects {
 
     repositories {
         mavenLocal()
+        jcenter()
         mavenCentral()
     }
 }
@@ -17,18 +18,10 @@ allprojects {
 subprojects {
     apply<JavaPlugin>()
     apply<JavaLibraryPlugin>()
-    apply<MavenPublishPlugin>()
 
     configure<JavaPluginExtension> {
         sourceCompatibility = JavaVersion.VERSION_1_8
+        withJavadocJar()
         withSourcesJar()
-    }
-
-    configure<PublishingExtension> {
-        publications {
-            create<MavenPublication>("library") {
-                from(components["java"])
-            }
-        }
     }
 }
